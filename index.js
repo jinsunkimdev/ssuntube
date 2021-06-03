@@ -1,2 +1,6 @@
 'use strict'
-console.log("Hello, Express!!!");
+import express from "express";
+
+const app = express();
+
+console.log("Hello!");
