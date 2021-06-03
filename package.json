@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "name": "kkoekkori",
+  "version": "1.0.0",
+  "description": "Web Application Sevice made by jinsun",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinsunkimdev/kkoekkori.git"
+  },
+  "author": "jinsunkimdev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jinsunkimdev/kkoekkori/issues"
+  },
+  "homepage": "https://github.com/jinsunkimdev/kkoekkori#readme"
+}
