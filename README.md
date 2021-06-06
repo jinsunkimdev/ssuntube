@@ -1,4 +1,4 @@
-This is my Express Video Web Application Service
+Web Application Service
 ================================================
 Node.JS, MongoDB
 ---------------- 
