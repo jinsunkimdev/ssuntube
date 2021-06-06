@@ -7,11 +7,15 @@ Node.JS, MongoDB
 
 # userRotuer
 "/users/join"
+
 "/users/login"
 
 # globalRouter
 "/videos"
+
 "/videos/edit"
+
 "/videos/detail"
+
 "/videos/delete"
 
