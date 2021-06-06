@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
   },
   "name": "kkoekkori",
   "version": "1.0.0",

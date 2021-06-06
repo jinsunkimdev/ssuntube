@@ -1,2 +1,17 @@
-This is my Express Web
-====================== 
+This is my Express Video Web Application Service
+================================================
+Node.JS, MongoDB
+---------------- 
+# globalRouter
+"/home"
+
+# userRotuer
+"/users/join"
+"/users/login"
+
+# globalRouter
+"/videos"
+"/videos/edit"
+"/videos/detail"
+"/videos/delete"
+
