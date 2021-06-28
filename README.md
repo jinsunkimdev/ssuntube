@@ -1,6 +1,6 @@
 Web Application Service(clone Youtube)
 ================================================
-Node.JS, MongoDB
+Node.JS, Vanilla JS, MongoDB, Pug
 ---------------- 
 # globalRouter
 "/home"
@@ -10,12 +10,16 @@ Node.JS, MongoDB
 
 "/users/login"
 
+"/users/edit"
+
 # globalRouter
-"/videos"
+"/videos/upload"
 
 "/videos/edit"
 
-"/videos/detail"
+"/videos/watch"(+comment section)
 
 "/videos/delete"
+
+"/videos/search
 
