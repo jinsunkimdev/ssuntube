@@ -9,6 +9,7 @@ Node.JS, Vanilla JS, MongoDB, Pug
 "/users/join"
 
 "/users/login"
+"/user/edit"
 
 "/users/edit"
 
