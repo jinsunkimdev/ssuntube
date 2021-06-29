@@ -5,7 +5,7 @@ export const getJoin = (req, res) => {
 
 export const postJoin = (req, res) => {
 	console.log("req.body=" + req.body.username);
-	res.redirect("/");
+	res.redirect("/");//test
 };
 
 export const login = (req, res) => {
