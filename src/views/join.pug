@@ -1,3 +1,7 @@
 extends base
 block content 
-	p Here is user join page
+	form(method="post")
+		input(type="text", name="username", id="username", required, min=3, max=20, placeholder="Your Name")
+		input(type="text", name="userid", id="userid", required, min=5, max=15, placeholder="Create Your ID")
+		input(type="password", name="password", id="password", required, min=8, max=20, placeholder="Create Your Password")
+		input(type="submit", value="Join")

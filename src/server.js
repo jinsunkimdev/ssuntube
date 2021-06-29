@@ -1,10 +1,9 @@
 'use strict'
 import express from 'express';
 import morgan from 'morgan';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import globalRouter from './routers/globalRouter';
 import userRouter from './routers/userRouter';
-dotenv.config();
 //variables
 const app = express();
 const logger = morgan;
@@ -13,6 +12,8 @@ app.set('view engine', 'pug');
 app.set('views', process.cwd() + "/src/views");
 //logger(morgan)
 app.use(logger('dev'));
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 //routers
 app.use("/", globalRouter);
 app.use("/users", userRouter);
