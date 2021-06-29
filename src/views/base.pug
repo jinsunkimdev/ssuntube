@@ -3,7 +3,13 @@ html(lang='ko')
     head 
         include partials/header
     body
-        h2 #{pageTitle}
+        h1 #{pageTitle}
+        nav 
+            a(href="/") HOME
+            a(href="/users/join") JOIN
+            a(href="/users/login") LOGIN
+            a(href="") Test
+            a(href="") Test
         block content
     footer
         include partials/footer

@@ -1,3 +1,9 @@
 extends base
 block content
-	h1 This is Home Page
+	ul
+		each userInfo in users 
+			h3 UserName = #{userInfo.userName}
+			h5 UserID = #{userInfo.userId} 
+			h5 Password = #{userInfo.password} 
+			h6=userInfo.createdAt 
+			hr

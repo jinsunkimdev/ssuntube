@@ -5,7 +5,7 @@ const handleErrorMessage = (error) => {
 	console.log("❌ db connection ERROR ❌")
 };
 const handleOpenMessage = (open) => {
-	console.log("👏 DB is Listening! 👏")
+	console.log("💁 DB is Listening! 👏")
 };
 
 // connect mongodb
