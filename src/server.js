@@ -14,15 +14,16 @@ const logger = morgan;
 //set view engine and path
 app.set('view engine', 'pug');
 app.set('views', process.cwd() + "/src/views");
+//express-session
+app.set(process.env.SESSION_PROXY, process.env.SESSION_PROXY_NUMBER) // proxy setting
 //cookieparser
 app.use(cookieParser());
 //express-session
-app.set(process.env.SESSION_PROXY, process.env.SESSION_PROXY_NUMBER) // proxy setting
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	resave: false,
 	saveUninitialized: true,
-	cookie: { secure: true, maxAge: 60000},
+	cookie: { secure: false, maxAge: 60000},
 }));
 //res.locals middleware
 app.use(sessionMiddleware);

@@ -1,6 +1,6 @@
 extends base
 block content
-	h4=loggedIn
+	p #{loggedIn}
 	ul
 		each userInfo in users 
 			h3 UserName = #{userInfo.userName}

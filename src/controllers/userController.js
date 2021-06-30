@@ -42,6 +42,7 @@ export const postLogin = async(req, res) => {
 			if(confirmUser){
 			req.session.loggedIn = true;
 			console.log(req.session.loggedIn);
+			console.log(req.session);
 			console.log("login success!");
 			res.redirect("/");
 			}else{
