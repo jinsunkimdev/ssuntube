@@ -28,35 +28,37 @@ export const postJoin = async(req, res) => {
 };
 
 export const getLogin = (req, res) => {
-	req.session.loggedIn = false; // login session
 	res.render("login", { pageTitle: "Login" })
 };
 export const postLogin = async(req, res) => {
 	const { 
 		userid,
 		password
-	} = req.body;
-	await bcrypt.hash(password, saltRounds, function(err, hash){
-		if(err){
-			console.log(err);
+	} = req.body;// inpute value
+	const confirmUser = await User.exists({ userId:userid });// if exists, return true
+	const hashFromDb = await User.findOne({ userId:userid }, 'password').exec();
+	await bcrypt.compare(password, hashFromDb.password, function(err, result) {
+		if(result){
+			if(confirmUser){
+			req.session.loggedIn = true;
+			console.log(req.session.loggedIn);
+			console.log("login success!");
+			res.redirect("/");
+			}else{
+			console.log("login failed");
+			res.render("login", {errorMessage:
+				"An internal error occurred. Please contact your system administrator.🙇"
+			})};
 		}else{
-			console.log(hash);
-			password = hash;
-		};
-	});
-	const confirmUser = await User.exists({ userid, password });
-	if(confirmUser){
-		req.session.loggedIn = true;
-		console.log("login success");
-		res.redirect("/");
-	}else{
-		console.log("login failed");
-		res.render("login", {pageTitle: "Login Error!"});
-	};
-}
+		console.log(err);
+		}});
+};
 
-export const login = (req, res) => {
-	res.render("login", { pageTitle: "Login"});
+export const logout = (req, res) => {
+	req.session.destroy(function(err){
+		req.session;
+	});
+	res.redirect("/");
 };
 
 export const editProfile = (req, res) => {

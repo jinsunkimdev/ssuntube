@@ -8,6 +8,8 @@ html(lang='ko')
             a(href="/") HOME
             a(href="/users/join") JOIN
             a(href="/users/login") LOGIN
+            if(loggedIn)
+                a(href="/users/logout") LOGOUT 
             a(href="") Test
             a(href="") Test
         block content

@@ -1,6 +1,7 @@
 extends base
 block content
+	p #{errorMessage}
 	form(action="", method="post") 
-		input(type="text", name="userid", required, min=5, max=15, placeholder="Input your ID")
-		input(type="password", name="password", required, min=8, max=20, placeholder="Input your Password")
+		input(type="text", name="userid", id="userid", required, min=5, max=15, placeholder="Input your ID")
+		input(type="password", name="password", id="password", required, min=8, max=20, placeholder="Input your Password")
 		input(type="submit", value="Login")
