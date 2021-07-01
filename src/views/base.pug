@@ -7,12 +7,23 @@ html(lang='ko')
         h3 #{notice}
         nav 
             a(href="/") HOME
+<<<<<<< HEAD
             if !loggedIn
                 a(href="/users/join") JOIN
                 a(href="/users/login") LOGIN
             if loggedIn
                 a(href="/users/logout") LOGOUT 
                 a(href="/users/editProfile") EDIT profile
+=======
+            a(href="/users/join") JOIN
+            a(href="/users/login") LOGIN
+            if loggedIn
+                a(href="/users/logout") LOGOUT 
+            else 
+                p Can't login
+            a(href="") Test
+            a(href="") Test
+>>>>>>> 5e8489be55cbf4ea584feea9212d9b223f7675cd
         block content
     footer
         include partials/footer

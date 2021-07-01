@@ -52,7 +52,13 @@ export const postLogin = async(req, res) => {
 		if(result){
 			if(confirmUserLogin){
 			req.session.loggedIn = true;
+<<<<<<< HEAD
 			req.session.loggedInUser = await User.findOne({userId:userid}, 'userName userId password').exec();
+=======
+			console.log(req.session.loggedIn);
+			console.log(req.session);
+			console.log("login success!");
+>>>>>>> 5e8489be55cbf4ea584feea9212d9b223f7675cd
 			res.redirect("/");
 			}else{
 			console.log("login failed");
