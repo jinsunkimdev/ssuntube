@@ -33,7 +33,6 @@ export const postJoin = async(req, res) => {
 			console.log(`error from JOIN page`);
 		};
 	};
-		const users = await User.find({});
 		res.redirect("/");
 };// postJoin
 
@@ -53,20 +52,15 @@ export const postLogin = async(req, res) => {
 			if(confirmUserLogin){
 			req.session.loggedIn = true;
 			req.session.loggedInUser = await User.findOne({userId:userid}, 'userName userId password').exec();
-			console.log(req.session.loggedIn);
-			console.log(req.session);
-			console.log("login success!");
 			res.redirect("/");
 			}else{
-			console.log("login failed");
-			res.render("login", {errorMessage:
-				"The ID is not correct.🙅"
+			res.render("login", {errorMessage:"The ID is not correct.🙅"
 			})};
 		}else{
 			res.render("login", {
 				pageTitle: "Login", errorMessage: "The ID/PASSWORD is incorrect🙅‍♀️"
 			});
-				console.log("password incoreect");
+				console.log("password incorect");
 		}});
 	}catch{
 		res.render("login", {
@@ -93,7 +87,6 @@ export const getEditPassword = (req, res) => {
 };// getEditPassword
 export const postEditPassword = async(req, res) => {
 	const { password } = req.body;
-	const originalPassword = req.session.loggedInUser.password;
 	const userid = req.session.loggedInUser.userId;
 	try{ 
 		await bcrypt.hash(password, saltRounds, async(err, hash) => {
