@@ -12,6 +12,7 @@ const handleOpenMessage = (open) => {
 mongoose.connect(process.env.MONGODB_URL,{ 
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
+	useFindAndModify: false,
 });
 const db = mongoose.connection;
 db.on('error', handleErrorMessage);

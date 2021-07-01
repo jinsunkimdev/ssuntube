@@ -4,16 +4,15 @@ html(lang='ko')
         include partials/header
     body
         h1 #{pageTitle}
+        h3 #{notice}
         nav 
             a(href="/") HOME
-            a(href="/users/join") JOIN
-            a(href="/users/login") LOGIN
+            if !loggedIn
+                a(href="/users/join") JOIN
+                a(href="/users/login") LOGIN
             if loggedIn
                 a(href="/users/logout") LOGOUT 
-            else 
-                p Can't login
-            a(href="") Test
-            a(href="") Test
+                a(href="/users/editProfile") EDIT profile
         block content
     footer
         include partials/footer
