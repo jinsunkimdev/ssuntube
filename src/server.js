@@ -4,9 +4,11 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 import session from 'express-session';
+import helmet from 'helmet';
 import globalRouter from './routers/globalRouter';
 import userRouter from './routers/userRouter';
 import { sessionMiddleware } from './localsMiddlewares';
+import videoRouter from './routers/videoRouter';
 
 //variables
 const app = express();
@@ -16,6 +18,8 @@ app.set('view engine', 'pug');
 app.set('views', process.cwd() + "/src/views");
 //express-session
 app.set(process.env.SESSION_PROXY, process.env.SESSION_PROXY_NUMBER) // proxy setting
+//helmet
+app.use(helmet());
 //cookieparser
 app.use(cookieParser());
 //express-session
@@ -34,4 +38,5 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 //routers
 app.use("/", globalRouter);
 app.use("/users", userRouter);
+app.use("/videos", videoRouter);
 export default app;

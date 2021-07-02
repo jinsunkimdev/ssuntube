@@ -2,6 +2,7 @@
 import app from "./server"
 import "./db";
 import "./models/User";
+import "./models/Video";
 //port 
 const PORT = process.env.SERVER_PORT;
 //connect server

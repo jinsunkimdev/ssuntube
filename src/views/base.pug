@@ -4,12 +4,12 @@ html(lang='ko')
         include partials/header
     body
         h1 #{pageTitle}
-        h3 #{notice}
         nav 
             a(href="/") HOME
             if !loggedIn
                 a(href="/users/join") JOIN
                 a(href="/users/login") LOGIN
+                a(href="/videos/uploadVideo") UPLOAD video
             if loggedIn
                 a(href="/users/logout") LOGOUT 
                 a(href="/users/editProfile") EDIT profile
