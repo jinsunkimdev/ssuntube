@@ -2,5 +2,7 @@ extends base
 block content 
 	p video upload page
 	form(method="POST", enctype="multipart/form-data")
+		input(type="text", name="videoTitle", id="videoTitle", min=5, max=20, required, placeholder="input Title of your video")
+		input(type="text", name="description", id="description", min=5, max=100, required, placeholder="input description of your video")
 		input(type="file", id="videoFile", name="videoFile", accept="video/*",required)
 		input(type="submit", value="Confirm")
