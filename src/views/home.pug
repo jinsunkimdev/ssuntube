@@ -9,7 +9,8 @@ block content
 			hr
 		each videoInfo in videos
 			h3 VideoTitle📺 = #{videoInfo.videoTitle}
-			h5 Description = #{videoInfo.description}
+			a(href=`/videos/${videoInfo._id}`, rel="stylesheet") link
+			h5 Description = #{"/" + videoInfo.description}
 			h5 Video File Url = #{videoInfo.fileUrl}
 			video(controls, width="250", height="200", autoplay)
 				source(src=videoInfo.fileUrl, type="video/mp4")

@@ -1,0 +1,6 @@
+extends base
+block content 
+	h3 VideoTitle📺 = #{videos.videoTitle}
+	h5 Description = #{videos.description}
+	video(width=350, height=300, src="/"+videos.fileUrl, controls)
+	hr

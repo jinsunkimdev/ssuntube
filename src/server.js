@@ -39,4 +39,5 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
+app.use("/uploads",express.static("uploads"));
 export default app;

@@ -1,7 +1,7 @@
 'use strict';
 import express from 'express';
 import multer from 'multer';
-import { getUploadVideo, postUploadVideo } from '../controllers/videoController';
+import { getUploadVideo, postUploadVideo, getWatch, postWatch} from '../controllers/videoController';
 // variables
 const eventDate = new Date(Date.now());
 const dateStrArray = eventDate.toISOString().split("-");
@@ -20,4 +20,5 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 // routes
 videoRouter.route("/uploadVideo").get(getUploadVideo).post(upload.single('videoFile'),postUploadVideo);
+videoRouter.get("/:id([A-Fa-f0-9]{24})", getWatch);
 export default videoRouter;
