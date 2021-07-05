@@ -17,9 +17,11 @@ export const postUploadVideo = async(req, res) => {
 };
 
 export const getWatch = async(req, res) => {
-	console.log(req.params.id)
 	const {id} = req.params;
 	const videos = await Video.findById(id);
-	console.log(videos);
+	if(!videos){
+		res.render("404", { pageTitle: "Sorry Nothing Found🙏"});
+	}else{
 	res.render("watchVideo", { pageTitle: "Watch", videos});
+	};
 };

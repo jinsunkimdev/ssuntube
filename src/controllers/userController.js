@@ -69,13 +69,15 @@ export const postLogin = async(req, res) => {
 	};
 };// postLogin
 export const getEditProfile = (req, res) => {
-	res.render("edit", { pageTitle: "Edit Profile"});
+	res.render("editProfile", { pageTitle: "Edit Profile"});
 };// getEditProfile
 export const postEditProfile = async(req, res) => {
+	console.log('req.file.path = ' + req.file.path);
 	const { username, userid } = req.body;
 	try{		
 		await User.findOneAndUpdate(username, { userName: username });
-		await User.findOneAndUpdate(userid, { userId: userid});
+		await User.findOneAndUpdate(userid, { userId: userid });
+		await User.findById(req.session.loggedInUser._id, { avatarUrl: req.file.path });
 		res.redirect("/");
 	}catch(err){
 		console.log(err);

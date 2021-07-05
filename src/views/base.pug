@@ -9,10 +9,10 @@ html(lang='ko')
             if !loggedIn
                 a(href="/users/join") JOIN
                 a(href="/users/login") LOGIN
-                a(href="/videos/uploadVideo") UPLOAD video
             if loggedIn
-                a(href="/users/logout") LOGOUT 
+                a(href="/videos/uploadVideo") UPLOAD video
                 a(href="/users/editProfile") EDIT profile
+                a(href="/users/logout") LOGOUT 
         block content
     footer
         include partials/footer

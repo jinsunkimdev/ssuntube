@@ -4,10 +4,11 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 import session from 'express-session';
+import mongostore from 'connect-mongo';
 import helmet from 'helmet';
 import globalRouter from './routers/globalRouter';
 import userRouter from './routers/userRouter';
-import { sessionMiddleware } from './localsMiddlewares';
+import { cannotGetMiddeware, sessionMiddleware } from './localsMiddlewares';
 import videoRouter from './routers/videoRouter';
 
 //variables
@@ -25,9 +26,12 @@ app.use(cookieParser());
 //express-session
 app.use(session({
 	secret: process.env.SESSION_SECRET,
+	store: mongostore.create({
+		mongoUrl: process.env.MONGODB_URL,
+	}),
 	resave: false,
-	saveUninitialized: true,
-	cookie: { secure: false, maxAge: 60000},
+	saveUninitialized: false,
+	//cookie: { secure: false, maxAge: 60000},
 }));
 //res.locals middleware
 app.use(sessionMiddleware);
@@ -40,4 +44,5 @@ app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 app.use("/uploads",express.static("uploads"));
+app.use(cannotGetMiddeware);
 export default app;

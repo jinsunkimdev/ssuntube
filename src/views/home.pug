@@ -5,6 +5,7 @@ block content
 			h3 UserName👩‍🏫 = #{userInfo.userName}
 			h5 UserID = #{userInfo.userId} 
 			h5 Password = #{userInfo.password} 
+			h5 AvatarUrl = #{userInfo.avatarUrl}
 			h6=userInfo.createdAt 
 			hr
 		each videoInfo in videos
@@ -12,7 +13,6 @@ block content
 			a(href=`/videos/${videoInfo._id}`, rel="stylesheet") link
 			h5 Description = #{"/" + videoInfo.description}
 			h5 Video File Url = #{videoInfo.fileUrl}
-			video(controls, width="250", height="200", autoplay)
+			video(controls, width="250", height="200")
 				source(src=videoInfo.fileUrl, type="video/mp4")
-				|Your browser does not support the video tag.
 			hr
