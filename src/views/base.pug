@@ -10,6 +10,7 @@ html(lang='ko')
                 a(href="/users/join") JOIN
                 a(href="/users/login") LOGIN
             if loggedIn
+                a(href=`/users/${loggedInUser._id}`) #{loggedInUser.userName}'s PROFILE
                 a(href="/videos/uploadVideo") UPLOAD video
                 a(href="/users/editProfile") EDIT profile
                 a(href="/users/logout") LOGOUT 

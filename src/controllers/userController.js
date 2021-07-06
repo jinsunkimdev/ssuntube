@@ -1,7 +1,6 @@
 'use strict';
 import User from "../models/User";
-import bcrypt, { hash } from "bcrypt";
-import { home } from "./globalController";
+import bcrypt from "bcrypt";
 // variables
 const saltRounds = 10;
 // functions
@@ -73,12 +72,18 @@ export const getEditProfile = (req, res) => {
 };// getEditProfile
 export const postEditProfile = async(req, res) => {
 	console.log('req.file.path = ' + req.file.path);
+	const _id = req.session.loggedInUser._id;
 	const { username, userid } = req.body;
 	try{		
-		await User.findOneAndUpdate(username, { userName: username });
-		await User.findOneAndUpdate(userid, { userId: userid });
-		await User.findById(req.session.loggedInUser._id, { avatarUrl: req.file.path });
+		await User.findOneAndUpdate(_id, { 
+			userName: username, 
+			userId: userid, 
+			avatarUrl: req.file.path}, { new: true });
+		if(User.exists({ userId: userid})){
+			res.render("editProfile", { pageTitle: "Edit Profile", errorMessage: "UserID is already using"});
+		}else{
 		res.redirect("/");
+		};
 	}catch(err){
 		console.log(err);
 	};
@@ -99,7 +104,12 @@ export const postEditPassword = async(req, res) => {
 		console.log(err);
 	};
 };// postEditPassword
-
+export const userDetail = async(req, res) => {
+	const { id } = req.params;
+	const userName = req.session.loggedInUser.userName;
+	const userInfo = await User.findById(id).exec();
+	res.render("userDetail", { pageTitle: `${userName}'s Page`, userInfo});
+}
 export const logout = (req, res) => {
 	req.session.destroy(function(err){
 		req.session;

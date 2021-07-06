@@ -5,7 +5,8 @@ import {
 	getJoin,postJoin,
 	getLogin,postLogin,logout,
 	getEditProfile,postEditProfile,
-	getEditPassword,postEditPassword
+	getEditPassword,postEditPassword,
+	userDetail
 } from '../controllers/userController';
 import { loginConfirmMiddleware } from '../localsMiddlewares';
 //variables
@@ -28,6 +29,7 @@ const upload = multer({ storage: storage });
 userRouter.route("/join").get(getJoin).post(postJoin);// Join
 userRouter.route("/login").get(getLogin).post(postLogin);
 userRouter.get("/logout", loginConfirmMiddleware,logout);
+userRouter.get("/:id([A-Fa-f0-9]{24})", userDetail);
 userRouter.route("/editProfile").get(loginConfirmMiddleware, getEditProfile).post(upload.single('profileImg'), postEditProfile);
 userRouter.route("/editPassword").get(loginConfirmMiddleware, getEditPassword).post(postEditPassword);
 export default userRouter;

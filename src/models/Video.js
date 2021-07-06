@@ -9,6 +9,7 @@ const videoSchema = new Schema({
 	description:{type: String, required: true, min: 5, max: 350},
 	createdAt:{type: Date, default: Date.now},
 	views:{type: Number, default: 0},
+	createdBy:{ type:Schema.Types.ObjectId, ref: 'User', default: ''},
 })
 
 const Video = mongoose.model('videos', videoSchema);
