@@ -1,5 +1,7 @@
 extends base
 block content
+	if(!loggedIn)
+		h4 Login please
 	ul
 		each userInfo in users 
 			h3 UserName👩‍🏫 = #{userInfo.userName}

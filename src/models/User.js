@@ -8,7 +8,7 @@ const userSchema = new Schema({
 	userId: { type: String, required: true, min: 5, max: 15 },
 	password: { type: String, required: true, min: 8, max: 20 },
 	createdAt: { type: Date, default: Date.now },
-	createdVideo: [{ type: Schema.Types.ObjectId, ref: 'Video'}],
+	createdVideo: [{ type: Schema.Types.ObjectId, required: true, ref: 'videos'}],//video id array
 });
 
 const User = mongoose.model('users', userSchema);

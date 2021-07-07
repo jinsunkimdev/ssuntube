@@ -1,6 +1,5 @@
 'use strict'
-import mongoose from "mongoose";
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const videoSchema = new Schema({
 	videoTitle:{type: String, required: true, min: 5, max: 20}, 
@@ -9,7 +8,7 @@ const videoSchema = new Schema({
 	description:{type: String, required: true, min: 5, max: 350},
 	createdAt:{type: Date, default: Date.now},
 	views:{type: Number, default: 0},
-	createdBy:{ type:mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+	createdBy:{ type:mongoose.Schema.Types.ObjectId, ref: 'users', required: true},
 })
 
 const Video = mongoose.model('videos', videoSchema);

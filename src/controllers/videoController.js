@@ -1,33 +1,35 @@
 'use strict';
 
-import Video from "../models/Video";
 import User from "../models/User";
+import Video from "../models/Video";
 
 export const getUploadVideo = (req, res) => {
 	res.render("uploadVideo", { pageTitle: "Upload your video!"});
 };
 export const postUploadVideo = async(req, res) => {
+	const loggedInUserId = req.session.loggedInUser._id;
 	const { videoTitle, description } = req.body;
-	await Video.create({
+	const newVideo = await Video.create({
 		videoTitle,
 		description,
 		fileUrl:req.file.path,
-		createdBy:req.session.loggedInUser._id,
+		createdBy:loggedInUserId,
 	})
-	Video.findOne({ _id: req.session.loggedInUser._id }).populate('userName').exec((err, data) => {
-		console.log(data);
-	      }); // 또는 populate({ path: 'bestFriend' })도 가능
+	const user = await User.findById(loggedInUserId);
+	user.createdVideo.push(newVideo._id);
 	res.redirect("/");
 };
 
 export const getWatch = async(req, res) => {
 	const {id} = req.params;
-	const createdUserId= await Video.findOne({_id: id}, 'createdBy').exec();
-	const createdUser = await User.findById(createdUserId.createdBy).exec();
-	const videos = await Video.findById(id);
-	if(!videos){
+	const userId = req.session.loggedInUser._id;
+	//const createdUser = await User.findById(createdUserId.createdBy).exec();
+	const videoCreator= await Video.findById(id).populate('createdBy');
+	const createdVideo = await User.findById(userId).populate('createdVideo');
+	console.log(createdVideo);
+	if(!videoCreator){
 		res.render("404", { pageTitle: "Sorry Nothing Found🙏"});
 	}else{
-	res.render("watchVideo", { pageTitle: "Watch", videos, createdUser});
+	res.render("watchVideo", { pageTitle: "Watch", videoCreator});
 	};
 };
