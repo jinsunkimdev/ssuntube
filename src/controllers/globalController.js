@@ -5,7 +5,9 @@ export const home = async(req, res) => {
 	try{
 	const users = await User.find({});
 	const videos = await Video.find({});
-	res.render('home', { pageTitle: "Home", users, videos});
+	const videoCreator = await User.findOne({ObjectId: videos.createdBy}, 'userName')
+	console.log(videoCreator.userName);
+	res.render('home', { pageTitle: "Home", users, videos, videoCreator});
 	}catch(error){
 		console.log("🏡Error from home" + error);
 	} // find users collections all info

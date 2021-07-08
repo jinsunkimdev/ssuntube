@@ -108,7 +108,10 @@ export const userDetail = async(req, res) => {
 	const { id } = req.params;
 	const userName = req.session.loggedInUser.userName;
 	const userInfo = await User.findById(id).exec();
-	res.render("userDetail", { pageTitle: `${userName}'s Page`, userInfo});
+	const userVideo = await User.findById(id).populate('createdVideo');
+	const createdVideo = userVideo.createdVideo;
+	console.log('userVideo='+userVideo);
+	res.render("userDetail", { pageTitle: `${userName}'s Page`, userInfo, createdVideo});
 }
 export const logout = (req, res) => {
 	req.session.destroy(function(err){

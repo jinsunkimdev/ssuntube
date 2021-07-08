@@ -3,4 +3,9 @@ block content
 	h3 #{ userInfo.userName }
 	h4 #{ userInfo.userId }
 	h1 My Videos
+	each userVideos in createdVideo
+		h3 #{ userVideos.videoTitle }
+		video(width=400, height=350, src=`/${userVideos.fileUrl}`, controls)
+		h4 #{ userVideos.description }
+		small #{ userVideos.createdAt }
 		
