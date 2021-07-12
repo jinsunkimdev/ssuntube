@@ -6,7 +6,8 @@ import {
 	getLogin,postLogin,logout,
 	getEditProfile,postEditProfile,
 	getEditPassword,postEditPassword,
-	userDetail
+	userDetail,
+	githubLoginStart,githubLoginFinish
 } from '../controllers/userController';
 import { loginConfirmMiddleware } from '../localsMiddlewares';
 //variables
@@ -32,4 +33,6 @@ userRouter.get("/logout", loginConfirmMiddleware,logout);
 userRouter.get("/:id([A-Fa-f0-9]{24})", userDetail);
 userRouter.route("/editProfile").get(loginConfirmMiddleware, getEditProfile).post(upload.single('profileImg'), postEditProfile);
 userRouter.route("/editPassword").get(loginConfirmMiddleware, getEditPassword).post(postEditPassword);
+userRouter.get("/github/start", githubLoginStart);
+userRouter.get("/github/finish", githubLoginFinish);
 export default userRouter;

@@ -119,3 +119,17 @@ export const logout = (req, res) => {
 	});
 	res.redirect("/");
 };// logout
+export const githubLoginStart = (req, res) => {
+	const baseUrl = "https://github.com/login/oauth/authorize";
+	const config = {
+		client_id:process.env.CLIENT_ID,
+		allow_signup:false,
+		scope:"read:user user:email",
+	};
+	const urlParams = new URLSearchParams(config).toString();
+	const finalUrl = `${baseUrl}?${urlParams}`;
+	return res.redirect(finalUrl);
+};
+export const githubLoginFinish = (req, res) => {
+
+}
