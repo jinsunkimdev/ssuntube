@@ -1,5 +1,6 @@
 'use strict';
 import User from "../models/User";
+import fetch from "node-fetch";
 import bcrypt from "bcrypt";
 // variables
 const saltRounds = 10;
@@ -131,31 +132,58 @@ export const githubLoginStart = (req, res) => {
 	return res.redirect(finalUrl);
 };
 export const githubLoginFinish = async(req, res) => {
-	const baseUrl = "https://github.com/login/oauth/authorize";
+	const baseUrl = "https://github.com/login/oauth/access_token";
 	const config = {
 		client_id: process.env.CLIENT_ID,
 		client_secret: process.env.CLIENT_SECRET,
 		code: req.query.code,
 	};
 	const params = new URLSearchParams(config).toString();
-	console.log('params'+params)
 	const finalUrl = `${baseUrl}?${params}`;
-	const data = (await fetch(finalUrl, {
+	const tokenRequest = await (
+		await fetch(finalUrl, {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
 		},
-	})).json;
-	const json = await data.json(); 
-	if("access_token" in json){
+	})
+	).json();
+	if("access_token" in tokenRequest){
 		//access api
-		const {access_token} = json;
-		const userRequest = await fetch("https://api.github.com/user", {
+		const {access_token} = tokenRequest;//access_token
+		const apiUrl = "https://api.github.com";
+		const userData = await (
+			await fetch(`${apiUrl}/user`, {
 			headers: {
 				Authorization: `token ${access_token}`,
-			}
+			},//send access_token to this url
+		})//when the fetch comes back, can get JSON
+		).json();
+		console.log(userData);
+		const emailData = await(
+			await fetch(`${apiUrl}/user/emails`, {
+			headers: {
+				Authorization: `token ${access_token}`,
+			},
 		})
-	}else {
-		return res.redirect("/login");
-	};
+		).json();
+		const emailObj = emailData.find(
+			(email) => email.primary === true && email.verified === true);
+		if(!emailObj){
+			return res.redirect("/login");
+		}
+		const existingUser = await User.findOne({ email: emailObj.email });
+		if(existingUser){
+			req.session.loggedIn = true;
+			req.session.user = existingUser;
+			return res.redirect("/");
+		}else{
+			// create an account
+		}
+		req.session.loggedIn = true;
+		req.session.loggedInUser = user;
+		return res.redirect("/");
+		}else {
+		return res.redirect("/users/login");
+	}
 };
